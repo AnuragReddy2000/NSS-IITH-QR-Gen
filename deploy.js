@@ -5,7 +5,7 @@ let build = async () => {
     console.log("delploying to gh-pages");
     await exec("git checkout gh-pages");
     console.log("removing existing files from gh-pages");
-    await exec("git rm --cached -r *");
+    await exec("git rm --f -r *");
     await exec('git commit -m "deleting previous build"');
     console.log("adding new build to gh-pages");
     await exec("git add -f build/*");
