@@ -1,0 +1,29 @@
+.loginComponent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 5px solid darkblue;
+    border-radius: 10px;
+    width: 320px;
+}
+
+@media screen and (min-width: 901px){
+    .loginComponent{
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-bottom: 20px;
+        width: 350px;
+    }
+}
+
+.loginErrorMsg{
+    color: #0D47A1;
+    padding-top: 5;
+    padding-bottom: 0;
+}
+
+.loginTitle{
+    color: #00317a;
+}
