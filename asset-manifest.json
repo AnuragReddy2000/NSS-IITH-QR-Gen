@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/NSS-IITH-QR-Gen/static/css/main.70b03612.chunk.css",
+    "main.js": "/NSS-IITH-QR-Gen/static/js/main.9ac25480.chunk.js",
+    "main.js.map": "/NSS-IITH-QR-Gen/static/js/main.9ac25480.chunk.js.map",
+    "runtime-main.js": "/NSS-IITH-QR-Gen/static/js/runtime-main.22119c6e.js",
+    "runtime-main.js.map": "/NSS-IITH-QR-Gen/static/js/runtime-main.22119c6e.js.map",
+    "static/js/2.8ca159aa.chunk.js": "/NSS-IITH-QR-Gen/static/js/2.8ca159aa.chunk.js",
+    "static/js/2.8ca159aa.chunk.js.map": "/NSS-IITH-QR-Gen/static/js/2.8ca159aa.chunk.js.map",
+    "static/js/3.76b2e80e.chunk.js": "/NSS-IITH-QR-Gen/static/js/3.76b2e80e.chunk.js",
+    "static/js/3.76b2e80e.chunk.js.map": "/NSS-IITH-QR-Gen/static/js/3.76b2e80e.chunk.js.map",
+    "index.html": "/NSS-IITH-QR-Gen/index.html",
+    "static/css/main.70b03612.chunk.css.map": "/NSS-IITH-QR-Gen/static/css/main.70b03612.chunk.css.map",
+    "static/js/2.8ca159aa.chunk.js.LICENSE.txt": "/NSS-IITH-QR-Gen/static/js/2.8ca159aa.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.22119c6e.js",
+    "static/js/2.8ca159aa.chunk.js",
+    "static/css/main.70b03612.chunk.css",
+    "static/js/main.9ac25480.chunk.js"
+  ]
+}
