@@ -81,7 +81,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
             <div className="eventsRecordPage">
                 <Modal showModal={this.state.createNew}>
                     <div className="eventsRecordCreateNew">
-                        <CgCloseO color="darkred" style={{alignSelf:"flex-end", marginRight:"10px", marginTop:"5px"}} onClick={this.toggleCreateNew}/>
+                        <CgCloseO color="darkred" size={27} style={{alignSelf:"flex-end", marginRight:"10px", marginTop:"5px"}} onClick={this.toggleCreateNew}/>
                         <EventEdit defaultDate="" defaultName="" 
                             defaultUrl="" defaultKey={QRUtils.getRandomKey()} 
                             buttonText="Create" isReadonly={false} 

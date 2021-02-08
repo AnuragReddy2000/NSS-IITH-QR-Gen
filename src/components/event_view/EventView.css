@@ -114,11 +114,15 @@
     width: 100%;
 }
 
+.eventViewButton:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 139, 0.2);
+}
+
 .eventViewButtonRow{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
     margin-bottom: 5px;
 }

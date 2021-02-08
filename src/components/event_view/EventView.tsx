@@ -61,8 +61,8 @@ class EventView extends React.Component<EventProps, EventState>{
             <div id={this.props.eventKey}>
                 <Modal showModal={this.state.showInfo}>
                     <div className="eventViewModalClose" >
-                        <CgCloseO color="darkred" onClick={this.toggleModalState}/>
-                        {this.state.isEditable? <IoArrowBack color="darkblue" onClick={this.toggleModalEditState}/> : null}
+                        <CgCloseO color="darkred" size={27} onClick={this.toggleModalState}/>
+                        {this.state.isEditable? <IoArrowBack color="darkblue" size={27} onClick={this.toggleModalEditState}/> : null}
                     </div>
                     <EventEdit key={this.props.url+this.props.name+this.props.eventKey} defaultName={this.props.name} 
                         defaultDate={this.props.date} defaultUrl={this.props.url} defaultKey={this.props.eventKey}
