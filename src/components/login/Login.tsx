@@ -2,6 +2,7 @@ import React from "react";
 import GoogleButton from 'react-google-button'
 import { FirebaseUtils } from "../../utils/FirebaseUtils";
 import "./Login.css";
+import {homepage} from "../../../package.json";
 
 interface LoginState{
     isLoggedIn: boolean,
@@ -94,7 +95,7 @@ class Login extends React.Component<LoginProps,LoginState>{
         return(
             <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center",height:"100vh", width:"100%"}}>
                 <div className="loginComponent">
-                    <img alt="NSS IITH Logo" src={"/bannerNSS.jpg"} style={{width: 300}}/>
+                    <img alt="NSS IITH Logo" src={homepage+"/bannerNSS.jpg"} style={{width: 300}}/>
                     <p className="loginTitle">QR Generator</p>
                     {this.state.isLoggedIn ? <GoogleButton label="Log out" onClick={this.logout}/> : <GoogleButton onClick={this.login}/>}
                     {this.state.showMsg ? <p className="loginErrorMsg">{this.state.msg}</p> : null}

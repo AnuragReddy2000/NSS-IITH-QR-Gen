@@ -6,6 +6,7 @@ import {CgAdd, CgCloseO} from "react-icons/cg";
 import EventEdit from "../event_edit/EventEdit";
 import QRUtils from "../../utils/QRUtils";
 import Modal from "../modal/Modal";
+import {homepage} from "../../../package.json";
 
 interface EventModel{
     name: string;
@@ -89,7 +90,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
                     </div>
                 </Modal>
                 <div className="eventsRecordTitle">
-                    <img alt="NSS IITH Logo" style={{width: 320, marginTop: 15}} src="/bannerSmall.jpg"/>
+                    <img alt="NSS IITH Logo" style={{width: 320, marginTop: 15}} src={homepage+"/bannerSmall.jpg"}/>
                     <div className="eventsRecordHeadRow">
                         <div className="eventsRecordHeading">Events Record</div>
                         <div className="eventsRecordAddNew" onClick={this.toggleCreateNew}>

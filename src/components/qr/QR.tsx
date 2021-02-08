@@ -2,6 +2,7 @@ import React from "react";
 import { QRCode } from "react-qr-svg";
 import QRUtils from "../../utils/QRUtils";
 import "./QR.css";
+import {homepage} from "../../../package.json";
 
 interface QRState{
     time: string;
@@ -59,7 +60,7 @@ class QR extends React.Component<QRProps, QRState>{
     render(){
         return(
             <div className="QRComponent">
-                <img alt="NSS IITH Logo" className="bannerSmall" style={{width: 300}} src={"/bannerSmall.jpg"}></img>
+                <img alt="NSS IITH Logo" className="bannerSmall" style={{width: 300}} src={homepage+"/bannerSmall.jpg"}></img>
                 <div className="eventName">{"Current event: " + this.props.eventName}</div>
                 <div className="QRIcon">
                     {this.state.isLoading ? null : <QRCode 
@@ -67,7 +68,7 @@ class QR extends React.Component<QRProps, QRState>{
                         style={{width: 300}} 
                         value={this.state.qrvalue}
                     />}
-                    <img alt="NSS IITH Logo" className="bannerNSS" style={{width: 300, marginLeft: 20}} src={"/bannerNSS.jpg"}></img>
+                    <img alt="NSS IITH Logo" className="bannerNSS" style={{width: 300, marginLeft: 20}} src={homepage+"/bannerNSS.jpg"}></img>
                 </div>
                 {this.state.isLoading ? <div className="QRLoading">Loading...</div> : null}
                 <p className="eventTime">{"Current Date and Time: " + this.state.time}</p>
