@@ -12,14 +12,19 @@ export class FirebaseUtils {
         return null;
     }
 
+    public static initialize_auth = (callback: Function) => {
+        const app = FirebaseUtils.getFirebaseApp();
+        app?.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+        app?.auth().onAuthStateChanged((user) => {
+            if(user){
+                callback();
+            }
+        })
+    }
+
     public static getUser = () => {
         const app = FirebaseUtils.getFirebaseApp();
         return {"name": app?.auth().currentUser?.displayName, "email": app?.auth().currentUser?.email};
-    }
-    
-    public static isUserLoggedin = (): boolean => {
-        const app = FirebaseUtils.getFirebaseApp();
-        return app?.auth().currentUser != null;
     }
 
     public static isValidTeamMember = async ():Promise<boolean> => {

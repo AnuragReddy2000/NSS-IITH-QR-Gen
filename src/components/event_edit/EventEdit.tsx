@@ -38,25 +38,25 @@ class EventEdit extends React.Component<EventEditProps, EventEditState>{
             <div className="eventEditModal" id={this.props.defaultKey}>
                 <div className="eventEditModalLabel">Event Name:</div>
                 <textarea id="inputname" className="eventEditModalInput" 
-                    cols={35} rows={1} defaultValue={this.props.defaultName} 
+                    cols={32} rows={1} defaultValue={this.props.defaultName} 
                     style={this.props.isReadonly ? {border:"2px solid darkgrey"}:{border:"2px solid grey"}} 
                     readOnly={this.props.isReadonly} 
                     onChange={(event) => this.setState({name: event.target.value})}></textarea>
                 <div className="eventEditModalLabel">Event Date:</div>
                 <textarea id="inputdate" className="eventEditModalInput" 
-                    cols={35} rows={1} defaultValue={this.props.defaultDate} 
+                    cols={32} rows={1} defaultValue={this.props.defaultDate} 
                     style={this.props.isReadonly ? {border:"2px solid darkgrey"}:{border:"2px solid grey"}} 
                     readOnly={this.props.isReadonly}
                     onChange={(event) => this.setState({date: event.target.value})}></textarea>
                 <div className="eventEditModalLabel">Event Url:</div>
                 <textarea id="inputurl" className="eventEditModalInput" 
-                    cols={35} rows={5} defaultValue={this.props.defaultUrl} 
+                    cols={32} rows={5} defaultValue={this.props.defaultUrl} 
                     style={this.props.isReadonly ? {border:"2px solid darkgrey"}:{border:"2px solid grey"}} 
                     readOnly={this.props.isReadonly}
                     onChange={(event) => this.setState({url: event.target.value})}></textarea>
                 <div className="eventEditModalLabel">Event Key:</div>
                 <textarea id="inputkey" className="eventEditModalInput" 
-                    cols={35} rows={2} defaultValue={this.props.defaultKey} 
+                    cols={32} rows={2} defaultValue={this.props.defaultKey} 
                     style={this.props.isReadonly ? {border:"2px solid darkgrey"}:{border:"2px solid grey"}} 
                     readOnly={this.props.isReadonly}
                     onChange={(event) => this.setState({eventkey: event.target.value})}></textarea>

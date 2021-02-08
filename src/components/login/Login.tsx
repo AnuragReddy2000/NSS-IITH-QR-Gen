@@ -19,28 +19,39 @@ interface LoginProps{
 class Login extends React.Component<LoginProps,LoginState>{
     constructor(props: LoginProps, state: LoginState){
         super(props,state);
+        FirebaseUtils.initialize_auth(this.onLogin);
         this.state = {
-            isLoggedIn: FirebaseUtils.isUserLoggedin(),
+            isLoggedIn: false,
             isValidUser: false,
-            showMsg: FirebaseUtils.isUserLoggedin(),
+            showMsg: false,
             msg: "Currently logged in as " + FirebaseUtils.getUser().email + ". Verifying access level, Please wait!"
+        }
+    }
+
+    onLogin = async () => {
+        const user = FirebaseUtils.getUser().email;
+        this.setState({
+            isLoggedIn: true,
+            showMsg: true,
+            msg: "Verifying user " + user + "... Please wait..."
+        });
+        const result = await FirebaseUtils.isValidTeamMember();
+        if(result){
+            this.setState({
+                isValidUser: true,
+                showMsg: true,
+                msg: "Login and verification success! Please wait..."
+            });
+            this.props.onLoginSuccess();
+        }
+        else{
+            this.showMessage("Sorry... You do not have access to this page!");
         }
     }
 
     async componentDidMount(){
         if(this.state.isLoggedIn && !this.state.isValidUser){
-            const result = await FirebaseUtils.isValidTeamMember();
-            if(result){
-                this.setState({
-                    isValidUser: true,
-                    showMsg: true,
-                    msg: "Login and verification success! Please wait..."
-                });
-                this.props.onLoginSuccess();
-            }
-            else{
-                this.showMessage("Sorry... You do not have access to this page!");
-            }
+            this.onLogin();
         }
     }
 
@@ -67,23 +78,7 @@ class Login extends React.Component<LoginProps,LoginState>{
     login = async () => {
         FirebaseUtils.login(
             async () => {
-                this.setState({
-                    isLoggedIn: true,
-                    showMsg: true,
-                    msg: "Verifying... Please wait..."
-                });
-                const result = await FirebaseUtils.isValidTeamMember();
-                console.log(result);
-                if(result){
-                    this.setState({
-                        showMsg: true,
-                        msg: "Login and verification success! Please wait..."
-                    });
-                    this.props.onLoginSuccess();
-                }
-                else{
-                    this.showMessage("Sorry... You do not have access to this page!");
-                }
+                this.onLogin();
             },
             () => {
                 this.showMessage("Oops... login failed. Please check your network connection")

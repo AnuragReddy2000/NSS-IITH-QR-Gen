@@ -28,7 +28,7 @@ class QR extends React.Component<QRProps, QRState>{
     }
 
     async componentDidMount(){
-        await new Promise(res => setTimeout(res, 700));
+        await new Promise(res => setTimeout(res, 200));
         const currentKey = QRUtils.getKey(this.props.eventkey, this.state.time);
         const newQRvalue = QRUtils.QrKeyGen(
             this.props.formUrl, 
