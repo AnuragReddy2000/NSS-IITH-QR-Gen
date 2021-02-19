@@ -2,6 +2,12 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
 let build = async () => {
+    console.log("Deleting existing build directory and re-building");
+    await exec("rmdir /s /q build");
+    await exec("browserify src/utils/worker_utils.js -o public/web_worker.js");
+    await exec("npm run build");
+    await exec("git add .");
+    await exec('git commit -m "Building for deployment"');
     console.log("delploying to gh-pages");
     await exec("git checkout gh-pages");
     await exec("git pull");

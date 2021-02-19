@@ -1,6 +1,5 @@
 import React from "react";
 import { QRCode } from "react-qr-svg";
-import QRUtils from "../../utils/QRUtils";
 import "./QR.css";
 import {homepage} from "../../../package.json";
 
@@ -8,6 +7,7 @@ interface QRState{
     time: string;
     isLoading: boolean;
     qrvalue: string;
+    worker: Worker;
 }
 
 interface QRProps{
@@ -23,38 +23,34 @@ class QR extends React.Component<QRProps, QRState>{
         this.state = {
             time: new Date().toLocaleString(),
             isLoading: true,
-            qrvalue: ""
+            qrvalue: "",
+            worker: new Worker("web_worker.js")
         }
     }
 
     async componentDidMount(){
-        await new Promise(res => setTimeout(res, 200));
-        const currentKey = QRUtils.getKey(this.props.eventkey, this.state.time);
-        const newQRvalue = QRUtils.QrKeyGen(
-            this.props.formUrl, 
-            this.props.eventName, 
-            currentKey,
-        );
-        this.setState({
-            isLoading:false,
-            qrvalue: newQRvalue,
-        })
-        QR.callbackID =  setInterval(() => {
-            const currentKey = QRUtils.getKey(this.props.eventkey, this.state.time);
-            const newQRvalue = QRUtils.QrKeyGen(
-                this.props.formUrl, 
-                this.props.eventName, 
-                currentKey,
-            );
-            this.setState({
-                time: new Date().toLocaleString(),
-                qrvalue: newQRvalue
-            });
-        }, 2000);
+        this.state.worker.postMessage({
+            msg: "init",
+            Url: this.props.formUrl,
+            Name: this.props.eventName,
+            Key: this.props.eventkey
+        });
+        this.state.worker.onmessage = ($event: MessageEvent) => {
+            if ($event && $event.data) {
+                this.setState({
+                    isLoading: false,
+                    qrvalue: $event.data,
+                    time: new Date().toLocaleString(),
+                });
+            }
+        };
     }
 
     async componentWillUnmount(){
-        clearInterval(QR.callbackID);
+        this.state.worker.postMessage({
+            msg: "exit"
+        });
+        this.state.worker.terminate();
     }
 
     render(){

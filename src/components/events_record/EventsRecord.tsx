@@ -4,8 +4,8 @@ import EventView from "../event_view/EventView";
 import './EventsRecord.css';
 import {CgAdd, CgCloseO} from "react-icons/cg";
 import EventEdit from "../event_edit/EventEdit";
-import QRUtils from "../../utils/QRUtils";
 import Modal from "../modal/Modal";
+import { v4 as uuidv4 } from 'uuid';
 import {homepage} from "../../../package.json";
 
 interface EventModel{
@@ -70,6 +70,10 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
         FirebaseUtils.saveChanges("events",{"details": this.state.events});
     }
 
+    getRandomKey = ():string => {
+        return uuidv4();
+    }
+
     toggleCreateNew = () =>{
         this.setState({
             createNew: !this.state.createNew
@@ -83,7 +87,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
                     <div className="eventsRecordCreateNew">
                         <CgCloseO color="darkred" size={27} style={{alignSelf:"flex-end", marginRight:"10px", marginTop:"5px"}} onClick={this.toggleCreateNew}/>
                         <EventEdit defaultDate="" defaultName="" 
-                            defaultUrl="" defaultKey={QRUtils.getRandomKey()} 
+                            defaultUrl="" defaultKey={this.getRandomKey()} 
                             buttonText="Create" isReadonly={false} 
                             onSubmit={this.onCreate}
                         />
