@@ -29,6 +29,7 @@ class QR extends React.Component<QRProps, QRState>{
     }
 
     async componentDidMount(){
+        console.log(window.innerHeight);
         this.state.worker.postMessage({
             msg: "init",
             Url: this.props.formUrl,
@@ -60,11 +61,12 @@ class QR extends React.Component<QRProps, QRState>{
                 <div className="eventName">{"Current event: " + this.props.eventName}</div>
                 <div className="QRIcon">
                     {this.state.isLoading ? null : <QRCode 
-                        level={"H"} 
-                        style={{width: 300}} 
+                        level={"H"} className="QRCodeImg"
                         value={this.state.qrvalue}
                     />}
-                    <img alt="NSS IITH Logo" className="bannerNSS" style={{width: 300, marginLeft: 20}} src={homepage+"/bannerNSS.jpg"}></img>
+                    <div className="bannerNSS">
+                        <img alt="NSS IITH Logo" style={{ width:"100%", marginLeft: 20}} src={homepage+"/bannerNSS.jpg"}></img>
+                    </div>
                 </div>
                 {this.state.isLoading ? <div className="QRLoading">Loading...</div> : null}
                 <p className="eventTime">{"Current Date and Time: " + this.state.time}</p>

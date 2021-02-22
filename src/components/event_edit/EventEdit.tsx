@@ -55,11 +55,11 @@ class EventEdit extends React.Component<EventEditProps, EventEditState>{
                     readOnly={this.props.isReadonly}
                     onChange={(event) => this.setState({url: event.target.value})}></textarea>
                 <div className="eventEditModalLabel">Event Key:</div>
-                <textarea id="inputkey" className="eventEditModalInput" 
-                    rows={1} defaultValue={this.props.defaultKey} 
+                <input id="inputkey" className="eventEditModalInput" 
+                    defaultValue={this.props.defaultKey} type="password"
                     style={this.props.isReadonly ? {border:"2px solid darkgrey"}:{border:"2px solid grey"}} 
-                    readOnly={this.props.isReadonly}
-                    onChange={(event) => this.setState({eventkey: event.target.value})}></textarea>
+                    readOnly={true}
+                    onChange={()=>{}}></input>
                 {this.props.isReadonly ? null : <div className="eventEditButton" onClick={this.onSubmit}>{this.props.buttonText}</div>}
             </div>
         );

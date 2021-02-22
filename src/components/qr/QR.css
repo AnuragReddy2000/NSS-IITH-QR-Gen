@@ -44,7 +44,7 @@
     }
 }
 
-@media screen and (min-width: 801px){
+@media screen and (min-width: 801px) and (max-width: 1000px){
     .QRIcon{
         display: flex;
         flex-direction: row;
@@ -63,8 +63,156 @@
     }
 
     .bannerNSS{
-        height: 300;
-        width: 300;
+        width: 300px;
+    }
+
+    .QRCodeImg{
+        height: 300px;
+        width: 300px;
+    }
+
+    .eventDetails{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        color: black;
+    }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1200px){
+    .bannerSmall{
+        display: none;
+    }
+
+    .bannerNSS{
+        width: 350px;
+    }
+
+    .QRCodeImg{
+        height: 350px;
+        width: 350px;
+    }
+
+    .QRIcon{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: black;
+    }
+
+    .QRComponent{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .eventDetails{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        color: black;
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1400px){
+    .bannerSmall{
+        display: none;
+    }
+
+    .bannerNSS{
+        width: 400px;
+    }
+
+    .QRCodeImg{
+        height: 400px;
+        width: 400px;
+    }
+
+    .QRIcon{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: black;
+    }
+
+    .QRComponent{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .eventDetails{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        color: black;
+    }
+}
+
+@media screen and (min-width: 1401px) and (max-width: 1600px){
+    .bannerSmall{
+        display: none;
+    }
+
+    .bannerNSS{
+        width: 500px;
+    }
+
+    .QRCodeImg{
+        height: 500px;
+        width: 500px;
+    }
+
+    .QRIcon{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: black;
+    }
+
+    .QRComponent{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .eventDetails{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        color: black;
+    }
+}
+
+@media screen and (min-width: 1601px){
+    .bannerSmall{
+        display: none;
+    }
+
+    .bannerNSS{
+        width: 600px;
+    }
+
+    .QRCodeImg{
+        height: 600px;
+        width: 600px;
+    }
+
+    .QRIcon{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: black;
+    }
+
+    .QRComponent{
+        padding-left: 30px;
+        padding-right: 30px;
     }
 
     .eventDetails{
@@ -89,3 +237,4 @@
     font-size: medium;
     font-weight: 500;
 }
+
