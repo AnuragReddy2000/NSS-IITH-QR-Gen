@@ -26728,24 +26728,24 @@ let QrKeyGen = (formUrl, eventName, key) => {
             bags = bags.replace("&","");
         }
     }
+    let ts = "";
+    const tsRegExpResult = RegExp(/&[\s\S]*prefilled-signature/).exec(formUrl);
+    if(tsRegExpResult != null){
+        ts = tsRegExpResult[0];
+        ts = ts.replace("=prefilled-signature","");
+        ts = ts.replace("&","");
+    }
     var payLoad = {
         "event": eventName,
         "type": type,
         "key": key,
         "url": url,
         "name": name,
-        "email": email
-    };;
+        "email": email,
+        "signature": ts
+    };
     if(type === "cid"){
-        payLoad = {
-            "event": eventName,
-            "type": type,
-            "key": key,
-            "url": url,
-            "name": name,
-            "email": email,
-            "bags": bags
-        };
+        payLoad["bags"] = bags;
     }
     return JSON.stringify(payLoad);
 };
