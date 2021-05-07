@@ -73,10 +73,13 @@ class EventView extends React.Component<EventProps, EventState>{
                         <div className="eventViewButton" onClick={this.toggleShowQR}>QR Code</div>
                     </div>}
                 </Modal>
-                {this.state.showQR ? <div className="eventViewQRBox">
-                    <CgCloseO className="eventViewQRClose" size={30} color="darkred" onClick={this.toggleModalState}/>
-                    <QR key={this.props.eventKey+this.props.name+this.props.url} eventName={this.props.name} formUrl={this.props.url} eventkey={this.props.eventKey}/>
-                </div>: null}
+                <Modal showModal={this.state.showQR}>
+                    <div className="eventViewQRBox">
+                        <CgCloseO className="eventViewQRClose" size={30} color="darkred" onClick={this.toggleModalState}/>
+                        <QR key={this.props.eventKey+this.props.name+this.props.url} eventName={this.props.name} formUrl={this.props.url} eventkey={this.props.eventKey}/>
+                    </div>
+                </Modal>
+                
                 <div className="eventViewBox" onClick={this.toggleModalState}>
                     <p className="eventViewTitle" onClick={this.toggleModalState}>{this.props.name}</p>
                     <p className="eventViewDate" onClick={this.toggleModalState}>{this.props.date}</p>
