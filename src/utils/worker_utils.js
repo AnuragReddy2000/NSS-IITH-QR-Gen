@@ -68,7 +68,6 @@ let QrKeyGen = (formUrl, eventName, key) => {
     if(type === "cid"){
         payLoad["bags"] = bags;
     }
-    print(JSON.stringify(payLoad))
     return JSON.stringify(payLoad);
 };
 
