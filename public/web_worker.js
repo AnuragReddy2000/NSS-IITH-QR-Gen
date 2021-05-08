@@ -26699,41 +26699,25 @@ let exit = () => {
 
 let QrKeyGen = (formUrl, eventName, key) => {
     const type = getEventType(formUrl);
-    const urlRegExpResult = RegExp(/[\s\S]*viewform/).exec(formUrl);
+    let url_components = formUrl.split("&");
+    const urlRegExpResult = RegExp(/[\s\S]*viewform/).exec(url_components[0]);
     let url = formUrl;
     if(urlRegExpResult != null){
         url = urlRegExpResult[0];
         url = url.replace("viewform","formResponse");
     }
-    let name = "";
-    const nameRegExpResult = RegExp(/&[\s\S]*prefilled-name/).exec(formUrl);
-    if(nameRegExpResult != null){
-        name = nameRegExpResult[0];
-        name = name.replace("=prefilled-name","");
-        name = name.replace("&","");
-    }
-    let email = "";
-    const emailRegExpResult = RegExp(/&[\s\S]*prefilled-email/).exec(formUrl);
-    if(emailRegExpResult != null){
-        email = emailRegExpResult[0];
-        email = email.replace("=prefilled-email","");
-        email = email.replace("&","");
-    }
-    let bags = "";
-    if(type === "cid"){
-        const bagsRegExpResult = RegExp(/&[\s\S]*prefilled-bags/).exec(formUrl);
-        if(bagsRegExpResult != null){
-            bags = bagsRegExpResult[0];
-            bags = bags.replace("=prefilled-bags","");
-            bags = bags.replace("&","");
+    let name = "", email="", ts="", bags = "";
+    for (i=1; i<url_components.length; i++){
+        let component = url_components[i]
+        if (component.includes("prefilled-name")){
+            name = component.replace("=prefilled-name","");
+        } else if (component.includes("prefilled-email")){
+            email = component.replace("=prefilled-email","");
+        } else if (component.includes("prefilled-signature")){
+            ts = component.replace("=prefilled-signature","");
+        } else {
+            bags = component.replace("=prefilled-bags","");
         }
-    }
-    let ts = "";
-    const tsRegExpResult = RegExp(/&[\s\S]*prefilled-signature/).exec(formUrl);
-    if(tsRegExpResult != null){
-        ts = tsRegExpResult[0];
-        ts = ts.replace("=prefilled-signature","");
-        ts = ts.replace("&","");
     }
     var payLoad = {
         "event": eventName,
@@ -26747,6 +26731,7 @@ let QrKeyGen = (formUrl, eventName, key) => {
     if(type === "cid"){
         payLoad["bags"] = bags;
     }
+    print(JSON.stringify(payLoad))
     return JSON.stringify(payLoad);
 };
 
