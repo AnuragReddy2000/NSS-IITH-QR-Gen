@@ -17,6 +17,7 @@ interface EventProps{
     url: string;
     eventKey: string;
     date: string;
+    eventId: string;
     onEdit: Function;
 }
 
@@ -44,8 +45,8 @@ class EventView extends React.Component<EventProps, EventState>{
         });
     }
 
-    onEdit = (name: string, date: string, url: string, eventkey: string) => {
-        this.props.onEdit(name, date, url, eventkey);
+    onEdit = (name: string, date: string, url: string, eventkey: string, eventId: string) => {
+        this.props.onEdit(name, date, url, eventkey, eventId);
         this.toggleModalState();
     }
 
@@ -66,7 +67,8 @@ class EventView extends React.Component<EventProps, EventState>{
                     </div>
                     <EventEdit key={this.props.url+this.props.name+this.props.eventKey} defaultName={this.props.name} 
                         defaultDate={this.props.date} defaultUrl={this.props.url} defaultKey={this.props.eventKey}
-                        onSubmit={this.onEdit} buttonText="Save" isReadonly={!this.state.isEditable}
+                        defaultId = {this.props.eventId} onSubmit={this.onEdit} buttonText="Save" 
+                        isReadonly={!this.state.isEditable}
                     />
                     {this.state.isEditable ? null : <div className="eventViewButtonRow">
                         <div className="eventViewButton" onClick={this.toggleModalEditState}>Edit</div>

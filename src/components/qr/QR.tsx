@@ -58,7 +58,7 @@ class QR extends React.Component<QRProps, QRState>{
         return(
             <div className="QRComponent">
                 <img alt="NSS IITH Logo" className="bannerSmall" style={{width: 300}} src={homepage+"/bannerSmall.jpg"}></img>
-                <div className="eventName">{"Current event: " + this.props.eventName}</div>
+                <div className="eventName">{"Event: " + this.props.eventName}</div>
                 <div className="QRIcon">
                     {this.state.isLoading ? null : <QRCode 
                         level={"H"} className="QRCodeImg"
@@ -69,7 +69,7 @@ class QR extends React.Component<QRProps, QRState>{
                     </div>
                 </div>
                 {this.state.isLoading ? <div className="QRLoading">Loading...</div> : null}
-                <p className="eventTime">{"Current Date and Time: " + this.state.time}</p>
+                <p className="eventTime">{"Date and Time: " + this.state.time}</p>
             </div>
         );
     }

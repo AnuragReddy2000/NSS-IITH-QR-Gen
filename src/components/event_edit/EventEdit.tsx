@@ -6,6 +6,7 @@ interface EventEditProps{
     defaultUrl: string;
     defaultDate: string;
     defaultKey: string;
+    defaultId: string;
     buttonText: string;
     onSubmit: Function;
     isReadonly: boolean;
@@ -30,7 +31,7 @@ class EventEdit extends React.Component<EventEditProps, EventEditState>{
     }
 
     onSubmit = () => {
-        this.props.onSubmit(this.state.name, this.state.date, this.state.url, this.state.eventkey);
+        this.props.onSubmit(this.state.name, this.state.date, this.state.url, this.state.eventkey, this.props.defaultId);
     }
 
     render(){
@@ -54,9 +55,9 @@ class EventEdit extends React.Component<EventEditProps, EventEditState>{
                     style={this.props.isReadonly ? {border:"2px solid darkgrey"}:{border:"2px solid grey"}} 
                     readOnly={this.props.isReadonly}
                     onChange={(event) => this.setState({url: event.target.value})}></textarea>
-                <div className="eventEditModalLabel">Event Key:</div>
+                <div className="eventEditModalLabel">Event Id:</div>
                 <input id="inputkey" className="eventEditModalInput" 
-                    defaultValue={this.props.defaultKey} type="password"
+                    defaultValue={this.props.defaultId} 
                     style={this.props.isReadonly ? {border:"2px solid darkgrey"}:{border:"2px solid grey"}} 
                     readOnly={true}
                     onChange={()=>{}}></input>

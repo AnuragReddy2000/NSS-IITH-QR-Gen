@@ -13,6 +13,7 @@ interface EventModel{
     url: string;
     date: string;
     eventkey: string;
+    eventId: string;
 }
 
 interface EventsRecordState{
@@ -41,12 +42,13 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
         });
     }
 
-    onCreate = (name: string, date: string, url: string, eventkey: string)  => {
+    onCreate = (name: string, date: string, url: string, eventkey: string, eventId: string)  => {
         const newEvent: EventModel = {
             name: name,
             date: date,
             url: url,
-            eventkey: eventkey
+            eventkey: eventkey,
+            eventId: eventId
         }
         this.state.events.unshift(newEvent);
         FirebaseUtils.saveChanges("events",{"details": this.state.events});
@@ -55,12 +57,13 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
         });
     }
 
-    onEdit = (index: number, name: string, date: string, url: string, eventkey: string) => {
+    onEdit = (index: number, name: string, date: string, url: string, eventkey: string, eventId: string) => {
         const newEvent: EventModel = {
             name,
             date,
             url,
-            eventkey
+            eventkey,
+            eventId
         }
         const newEvents = this.state.events.map((val) => JSON.parse(JSON.stringify(val)))
         newEvents[index] = newEvent
@@ -72,6 +75,12 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
 
     getRandomKey = ():string => {
         return uuidv4();
+    }
+
+    getNewId = ():string => {
+        let ts = new Date();
+        const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
+        return ts.getDate() + "-" + months[ts.getMonth()] + "-" + ts.getFullYear() + "-" + ts.getHours() + "-" + ts.getMinutes() + "-" + ts.getSeconds()
     }
 
     toggleCreateNew = () =>{
@@ -87,7 +96,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
                     <div className="eventsRecordCreateNew">
                         <CgCloseO color="darkred" size={27} style={{alignSelf:"flex-end", marginRight:"10px", marginTop:"5px"}} onClick={this.toggleCreateNew}/>
                         <EventEdit defaultDate="" defaultName="" 
-                            defaultUrl="" defaultKey={this.getRandomKey()} 
+                            defaultUrl="" defaultKey={this.getRandomKey()} defaultId={this.getNewId()}
                             buttonText="Create" isReadonly={false} 
                             onSubmit={this.onCreate}
                         />
@@ -106,10 +115,10 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
                 <div className="eventsRecordGrid">
                     {this.state.isLoading ? <div style={{color:"black"}}>
                         Loading please wait...
-                    </div>: this.state.events.map( (value, index) => <EventView key={value.eventkey+value.url+value.name}
-                            name={value.name} date={value.date} url={value.url} eventKey={value.eventkey}
+                    </div>: this.state.events.map( (value, index) => <EventView key={value.eventId}
+                            name={value.name} date={value.date} url={value.url} eventKey={value.eventkey} eventId={value.eventId}
                             onEdit={(name: string, date: string, 
-                                url: string, eventkey: string) => this.onEdit(index, name, date, url, eventkey)}/>
+                                url: string, eventkey: string, eventId: string) => this.onEdit(index, name, date, url, eventkey, eventId)}/>
                         )
                     }
                 </div>
