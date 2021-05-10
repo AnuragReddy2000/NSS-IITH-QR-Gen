@@ -17,6 +17,7 @@ interface EventEditState{
     url: string;
     date: string;
     eventkey: string;
+    showMsg: boolean;
 }
 
 class EventEdit extends React.Component<EventEditProps, EventEditState>{
@@ -26,12 +27,23 @@ class EventEdit extends React.Component<EventEditProps, EventEditState>{
             name: this.props.defaultName,
             date: this.props.defaultDate,
             url: this.props.defaultUrl,
-            eventkey: this.props.defaultKey
+            eventkey: this.props.defaultKey,
+            showMsg: false
         }
     }
 
     onSubmit = () => {
-        this.props.onSubmit(this.state.name, this.state.date, this.state.url, this.state.eventkey, this.props.defaultId);
+        if (this.state.name !== "" && this.state.date !== "" && this.state.url !== "" && this.state.eventkey !== ""){
+            this.setState({
+                showMsg: false
+            });
+            this.props.onSubmit(this.state.name, this.state.date, this.state.url, this.state.eventkey, this.props.defaultId);
+        }
+        else{
+            this.setState({
+                showMsg: true
+            });
+        }
     }
 
     render(){
@@ -61,6 +73,7 @@ class EventEdit extends React.Component<EventEditProps, EventEditState>{
                     style={this.props.isReadonly ? {border:"2px solid darkgrey"}:{border:"2px solid grey"}} 
                     readOnly={true}
                     onChange={()=>{}}></input>
+                {!this.props.isReadonly && this.state.showMsg ? <div className="eventEditModalMsg">Please enter all fields!</div>: null}
                 {this.props.isReadonly ? null : <div className="eventEditButton" onClick={this.onSubmit}>{this.props.buttonText}</div>}
             </div>
         );

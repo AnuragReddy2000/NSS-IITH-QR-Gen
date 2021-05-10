@@ -5,6 +5,7 @@ var currentKey = "";
 var currentFormUrl = "";
 var currentEventName = "";
 var intervalID;
+var crypto;
 
 self.onmessage = async ($event) => {
     if ($event && $event.data && $event.data.msg === 'init') {
@@ -23,6 +24,7 @@ let init = (Url, Name, Key) => {
     currentEventName = Name;
     currentKey = Key;
     console.log("initializing web worker");
+    crypto = new Cryptr(Key);
     intervalID = setInterval(()=>{
         QRString = QrKeyGen(currentFormUrl, currentEventName, getKey(currentKey));
         console.log("generated qr payload");
@@ -79,7 +81,6 @@ let getEventType = (formUrl)=> {
 }
 
 let getKey = (key) => {
-    const crypto = new Cryptr(key);
     const datetime = new Date();
     return crypto.encrypt(datetime.toLocaleString());
 }

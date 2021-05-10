@@ -70,7 +70,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
         this.setState({
             events: newEvents
         });
-        FirebaseUtils.saveChanges("events",{"details": this.state.events});
+        FirebaseUtils.saveChanges("events",{"details": newEvents});
     }
 
     getRandomKey = ():string => {
@@ -95,7 +95,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
                 <Modal showModal={this.state.createNew}>
                     <div className="eventsRecordCreateNew">
                         <CgCloseO color="darkred" size={27} style={{alignSelf:"flex-end", marginRight:"10px", marginTop:"5px"}} onClick={this.toggleCreateNew}/>
-                        <EventEdit defaultDate="" defaultName="" 
+                        <EventEdit key={this.getRandomKey()} defaultDate="" defaultName="" 
                             defaultUrl="" defaultKey={this.getRandomKey()} defaultId={this.getNewId()}
                             buttonText="Create" isReadonly={false} 
                             onSubmit={this.onCreate}
