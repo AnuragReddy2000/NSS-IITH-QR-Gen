@@ -69,7 +69,7 @@ class Crypto{
             aesKey,
             this._stringToArrayBuffer(message)
         )
-        return new Uint8Array(enc_msg).toString().replace(",",":");
+        return (new Uint8Array(enc_msg).toString()).replaceAll(",",":");
     }
 
     decrypt = async (message: string) => {
