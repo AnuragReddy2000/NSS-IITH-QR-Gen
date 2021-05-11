@@ -4,7 +4,7 @@ const exec = util.promisify(require('child_process').exec);
 let build = async () => {
     console.log("Deleting existing build directory and re-building");
     await exec("rmdir /s /q build");
-    await exec("browserify src/utils/worker_utils.js -o public/web_worker.js");
+    //await exec("browserify src/utils/worker_utils.js -o public/web_worker.js");
     await exec("npm run build");
     await exec("git add .");
     try{
