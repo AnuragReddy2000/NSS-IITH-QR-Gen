@@ -56,7 +56,7 @@ class Crypto{
     }
 
     private _Uint8stringToArrayBuffer(enc_str: string){
-        return new Uint8Array( enc_str.split(",").map((each) => Number(each)) ).buffer
+        return new Uint8Array( enc_str.split(":").map((each) => Number(each)) ).buffer
     }
 
     encrypt = async (message: string) => {
@@ -64,14 +64,12 @@ class Crypto{
         const enc_msg = await window.crypto.subtle.encrypt(
             {
                 name: "AES-CBC",
-                //Don't re-use initialization vectors!
-                //Always generate a new iv every time your encrypt!
                 iv: new Uint8Array(16),
             },
-            aesKey, //from generateKey or importKey above
-            this._stringToArrayBuffer(message) //ArrayBuffer of data you want to encrypt
+            aesKey,
+            this._stringToArrayBuffer(message)
         )
-        return new Uint8Array(enc_msg).toString();
+        return new Uint8Array(enc_msg).toString().replace(",",":");
     }
 
     decrypt = async (message: string) => {
@@ -79,10 +77,10 @@ class Crypto{
         const dec_msg = await window.crypto.subtle.decrypt(
             {
                 name: "AES-CBC",
-                iv: new Uint8Array(16), //The initialization vector you used to encrypt
+                iv: new Uint8Array(16), 
             },
-            aesKey, //from generateKey or importKey above
-            this._Uint8stringToArrayBuffer(message) //ArrayBuffer of the data
+            aesKey, 
+            this._Uint8stringToArrayBuffer(message)
         )
         return this._ArrayBufferTostring(dec_msg);
     }

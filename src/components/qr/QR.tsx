@@ -45,10 +45,7 @@ class QR extends React.Component<QRProps, QRState>{
 
     refreshQR = async () => {
         const datetime = new Date();
-        const before = datetime.getTime();
-        const signature = await this.state.cipher.encrypt(datetime.toLocaleString());
-        const after = new Date().getTime();
-        console.log("The time: " + (after - before).toString());
+        const signature = await this.state.cipher.encrypt(datetime.toLocaleString("en-IN", {"hour12": false}));
         const QRpayload = QRUtils.getQRPayload(this.props.formUrl, this.props.eventName, signature);
         this.setState({
             isLoading: false,
