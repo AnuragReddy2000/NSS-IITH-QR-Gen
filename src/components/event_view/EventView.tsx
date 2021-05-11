@@ -17,6 +17,7 @@ interface EventProps{
     url: string;
     eventKey: string;
     date: string;
+    eventId: string;
     onEdit: Function;
 }
 
@@ -44,8 +45,8 @@ class EventView extends React.Component<EventProps, EventState>{
         });
     }
 
-    onEdit = (name: string, date: string, url: string, eventkey: string) => {
-        this.props.onEdit(name, date, url, eventkey);
+    onEdit = (name: string, date: string, url: string, eventkey: string, eventId: string) => {
+        this.props.onEdit(name, date, url, eventkey, eventId);
         this.toggleModalState();
     }
 
@@ -66,17 +67,21 @@ class EventView extends React.Component<EventProps, EventState>{
                     </div>
                     <EventEdit key={this.props.url+this.props.name+this.props.eventKey} defaultName={this.props.name} 
                         defaultDate={this.props.date} defaultUrl={this.props.url} defaultKey={this.props.eventKey}
-                        onSubmit={this.onEdit} buttonText="Save" isReadonly={!this.state.isEditable}
+                        defaultId = {this.props.eventId} onSubmit={this.onEdit} buttonText="Save" 
+                        isReadonly={!this.state.isEditable}
                     />
                     {this.state.isEditable ? null : <div className="eventViewButtonRow">
                         <div className="eventViewButton" onClick={this.toggleModalEditState}>Edit</div>
                         <div className="eventViewButton" onClick={this.toggleShowQR}>QR Code</div>
                     </div>}
                 </Modal>
-                {this.state.showQR ? <div className="eventViewQRBox">
-                    <CgCloseO className="eventViewQRClose" size={30} color="darkred" onClick={this.toggleModalState}/>
-                    <QR key={this.props.eventKey+this.props.name+this.props.url} eventName={this.props.name} formUrl={this.props.url} eventkey={this.props.eventKey}/>
-                </div>: null}
+                <Modal showModal={this.state.showQR}>
+                    <div className="eventViewQRBox">
+                        <CgCloseO className="eventViewQRClose" size={30} color="darkred" onClick={this.toggleModalState}/>
+                        <QR key={this.props.eventKey+this.props.name+this.props.url} eventName={this.props.name} formUrl={this.props.url} eventkey={this.props.eventKey}/>
+                    </div>
+                </Modal>
+                
                 <div className="eventViewBox" onClick={this.toggleModalState}>
                     <p className="eventViewTitle" onClick={this.toggleModalState}>{this.props.name}</p>
                     <p className="eventViewDate" onClick={this.toggleModalState}>{this.props.date}</p>

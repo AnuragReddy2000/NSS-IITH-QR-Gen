@@ -7,7 +7,11 @@ let build = async () => {
     await exec("browserify src/utils/worker_utils.js -o public/web_worker.js");
     await exec("npm run build");
     await exec("git add .");
-    await exec('git commit -m "Building for deployment"');
+    try{
+        await exec('git commit -m "Building for deployment"');
+    } catch (e){
+        console.log(e)
+    }
     console.log("delploying to gh-pages");
     await exec("git checkout gh-pages");
     await exec("git pull");

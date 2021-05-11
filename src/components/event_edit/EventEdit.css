@@ -33,3 +33,10 @@
     margin: 1px;
     margin-top: 10px;
 }
+
+.eventEditModalMsg{
+    color: red;
+    font-size: small;
+    font-weight: bold;
+    padding-top: 4px;
+}
