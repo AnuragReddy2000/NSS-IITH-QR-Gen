@@ -7,6 +7,17 @@
     align-items: center;
 }
 
+.eventsRecordLoadingMessage{
+    color: black;
+    font-weight: 600;
+    align-self: center;
+    position: absolute;
+    width: 100vw;
+    text-align: center;
+    top: 50vh;
+    z-index: 2;
+}
+
 .eventsRecordTitle{
     background-color: white;
     display: flex;

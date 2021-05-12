@@ -68,8 +68,7 @@ class QR extends React.Component<QRProps, QRState>{
                         <img alt="NSS IITH Logo" style={{ width:"100%", marginLeft: 20}} src={homepage+"/bannerNSS.jpg"}></img>
                     </div>
                 </div>
-                {this.state.isLoading ? <div className="QRLoading">Loading...</div> : null}
-                <p className="eventTime">{"Date and Time: " + this.state.time}</p>
+                {this.state.isLoading ? <div className="QRLoading">Loading...</div> : <p className="eventTime">{"Date and Time: " + this.state.time}</p>}
             </div>
         );
     }

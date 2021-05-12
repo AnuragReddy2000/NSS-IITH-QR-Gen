@@ -31,6 +31,17 @@ class EventView extends React.Component<EventProps, EventState>{
         }
     }
 
+    componentDidMount(){
+        const query_params = window.location.search;
+        if (query_params !== ""){
+            if (query_params.includes(this.props.eventId)){
+                this.setState({
+                    showQR: true
+                })
+            }
+        }
+    }
+
     toggleModalState = () => {
         this.setState({
             showInfo: !this.state.showInfo,
@@ -51,7 +62,14 @@ class EventView extends React.Component<EventProps, EventState>{
     }
 
     toggleShowQR = () =>{
-        console.log("toggling");
+        if (this.state.showQR === false){
+            window.history.replaceState({"qr":this.props.eventId}, "", "?qr="+this.props.eventId)
+        }
+        else{
+            const url = new URL(window.location.href);
+            url.searchParams.delete("qr");
+            window.history.replaceState({}, "", url.href);
+        }
         this.setState({
             showQR: !this.state.showQR
         });
@@ -77,7 +95,7 @@ class EventView extends React.Component<EventProps, EventState>{
                 </Modal> : null}
                 {this.state.showQR ? <Modal>
                     <div className="eventViewQRBox">
-                        <CgCloseO className="eventViewQRClose" size={30} color="darkred" onClick={this.toggleModalState}/>
+                        <CgCloseO className="eventViewQRClose" size={30} color="darkred" onClick={this.toggleShowQR}/>
                         <QR key={this.props.eventKey+this.props.name+this.props.url} eventName={this.props.name} formUrl={this.props.url} eventkey={this.props.eventKey}/>
                     </div>
                 </Modal> : null}

@@ -13,7 +13,7 @@ class App extends React.Component<AppProps, AppState>{
   constructor(props: AppProps, state: AppState){
     super(props,state);
     this.state = {
-      isValidUserLoggedIn: false
+      isValidUserLoggedIn: (sessionStorage.getItem("isValidUserLoggedIn") == null) ? false : true
     }
   }
 

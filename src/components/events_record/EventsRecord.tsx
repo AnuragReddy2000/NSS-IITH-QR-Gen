@@ -103,7 +103,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
                     </div>
                 </Modal> : null}
                 <div className="eventsRecordTitle">
-                    <img alt="NSS IITH Logo" style={{width: 320, marginTop: 15}} src={homepage+"/bannerSmall.jpg"}/>
+                    <img alt="NSS IITH Logo" style={{width: 320, marginTop: 15}} src={homepage+"/bannerSmall.jpg"} height={79} width={320}/>
                     <div className="eventsRecordHeadRow">
                         <div className="eventsRecordHeading">Events Record</div>
                         <div className="eventsRecordAddNew" onClick={this.toggleCreateNew}>
@@ -113,7 +113,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
                     </div>
                 </div>
                 <div className="eventsRecordGrid">
-                    {this.state.isLoading ? <div style={{color:"black"}}>
+                    {this.state.isLoading ? <div className="eventsRecordLoadingMessage">
                         Loading please wait...
                     </div>: this.state.events.map( (value, index) => <EventView key={value.eventId}
                             name={value.name} date={value.date} url={value.url} eventKey={value.eventkey} eventId={value.eventId}
