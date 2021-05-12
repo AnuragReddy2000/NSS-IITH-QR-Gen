@@ -1,16 +1,11 @@
 import React from "react";
 import "./Modal.css"
 
-interface ModalProps{
-    showModal: boolean;
-}
-
-class Modal extends React.Component<ModalProps>{
+class Modal extends React.Component{
 
     render(){
-        const showHideClassName = this.props.showModal ? "modal display-block" : "modal display-none";
         return(
-            <div className={showHideClassName}>
+            <div className="modal display-block">
                 <section className="modal-main">
                     {this.props.children}
                 </section>

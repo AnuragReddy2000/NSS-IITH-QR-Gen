@@ -60,7 +60,7 @@ class EventView extends React.Component<EventProps, EventState>{
     render(){
         return(
             <div id={this.props.eventKey}>
-                <Modal showModal={this.state.showInfo}>
+                {this.state.showInfo ? <Modal>
                     <div className="eventViewModalClose" >
                         <CgCloseO color="darkred" size={27} onClick={this.toggleModalState}/>
                         {this.state.isEditable? <IoArrowBack color="darkblue" size={27} onClick={this.toggleModalEditState}/> : null}
@@ -74,14 +74,13 @@ class EventView extends React.Component<EventProps, EventState>{
                         <div className="eventViewButton" onClick={this.toggleModalEditState}>Edit</div>
                         <div className="eventViewButton" onClick={this.toggleShowQR}>QR Code</div>
                     </div>}
-                </Modal>
-                <Modal showModal={this.state.showQR}>
+                </Modal> : null}
+                {this.state.showQR ? <Modal>
                     <div className="eventViewQRBox">
                         <CgCloseO className="eventViewQRClose" size={30} color="darkred" onClick={this.toggleModalState}/>
                         <QR key={this.props.eventKey+this.props.name+this.props.url} eventName={this.props.name} formUrl={this.props.url} eventkey={this.props.eventKey}/>
                     </div>
-                </Modal>
-                
+                </Modal> : null}
                 <div className="eventViewBox" onClick={this.toggleModalState}>
                     <p className="eventViewTitle" onClick={this.toggleModalState}>{this.props.name}</p>
                     <p className="eventViewDate" onClick={this.toggleModalState}>{this.props.date}</p>

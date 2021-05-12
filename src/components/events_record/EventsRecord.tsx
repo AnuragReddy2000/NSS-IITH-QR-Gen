@@ -92,7 +92,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
     render(){
         return(
             <div className="eventsRecordPage">
-                <Modal showModal={this.state.createNew}>
+                {this.state.createNew ? <Modal>
                     <div className="eventsRecordCreateNew">
                         <CgCloseO color="darkred" size={27} style={{alignSelf:"flex-end", marginRight:"10px", marginTop:"5px"}} onClick={this.toggleCreateNew}/>
                         <EventEdit key={this.getRandomKey()} defaultDate="" defaultName="" 
@@ -101,7 +101,7 @@ class EventsRecord extends React.Component<EventsRecordProps, EventsRecordState>
                             onSubmit={this.onCreate}
                         />
                     </div>
-                </Modal>
+                </Modal> : null}
                 <div className="eventsRecordTitle">
                     <img alt="NSS IITH Logo" style={{width: 320, marginTop: 15}} src={homepage+"/bannerSmall.jpg"}/>
                     <div className="eventsRecordHeadRow">
